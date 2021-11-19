@@ -1,3 +1,3 @@
 # CS410
 
-this is a basic deterministic finite automata (DFA) simulator using java
+this repository includes all class projects about automata theory and regular languages
