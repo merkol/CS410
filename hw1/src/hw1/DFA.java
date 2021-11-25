@@ -38,7 +38,7 @@ public class DFA {
 		inputs = new String[numberOfVariables];
 		goalStates = new String[numberOfGoalStates];
 
-		for (int i = 0; i < numberOfStates * 2; i++) {
+		for (int i = 0; i < numberOfStates * numberOfVariables; i++) {
 			transitions.add(new Transition());
 		}
 
