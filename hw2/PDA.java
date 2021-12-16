@@ -143,9 +143,11 @@ public class PDA{
 		String key = input + "," + currentState;
 		if(Map.containsKey(key) == true && Map.containsKey("e,"+currentState ) == true)
 		{
+			
 			Transition transition = Map.get(key);
 			currentState = transition.newState;
-			return false;
+			return true;
+			
 			
 		}
 		
@@ -154,7 +156,7 @@ public class PDA{
 		else if(Map.containsKey(key) == true && Map.containsKey("e,"+currentState ) == false){
 			Transition transition = Map.get(key);
 			currentState = transition.newState;
-			return false;
+			
 		}
 		else if(Map.containsKey(key) == false){
 			if(Map.containsKey("e,"+currentState))
@@ -162,15 +164,26 @@ public class PDA{
 				Transition transition = Map.get("e,"+currentState);
 				currentState = transition.newState;
 				return true;
+				
 			}
 		}
-		
 		return false;
 		
-
+	}
 	
-
-
+	
+	public boolean input_e(){
+		if(Map.containsKey("e,"+currentState) == true){
+			
+		while(Map.containsKey("e,"+currentState) == true )
+		{
+			Transition transition = Map.get("e,"+currentState);
+			
+			currentState = transition.newState;	
+			return true;		
+		}
+	}
+	return false;
 	}
 
 
@@ -203,9 +216,13 @@ public class PDA{
 			System.out.print(t.newState);
 			System.out.println(" ");
 		}
+		
 		System.out.println(pda.transitions.size());
 
 		System.out.println("Please enter the inputs");
+		
+		
+		
 		input_1 = pda.s.next();
 		System.out.println(input_1);
 		System.out.println("Please enter the second inputs");
@@ -219,14 +236,26 @@ public class PDA{
 		for (int i = 0; i < input_1.length(); i++) {
 			String s = String.valueOf(input_1.charAt(i));
 			
-			if(pda.input(s)==true){
-				System.out.print(pda.currentState + " ");
-			}
 			
+			pda.input(s);
 			System.out.print(pda.currentState + " ");
 			buffer1.write(pda.currentState + " ");
-
+			
 		}
+		for (int i = 0; i < pda.states.length; i++) {
+			
+			
+			
+			if(pda.input_e()){
+				System.out.print(pda.currentState + " ");
+				buffer1.write(pda.currentState + " ");
+			}
+			
+			
+		}
+
+		
+		
 		buffer1.newLine();
 		System.out.println();
 
@@ -249,12 +278,25 @@ public class PDA{
 		for (int i = 0; i < input_2.length(); i++) {
 			String s = String.valueOf(input_2.charAt(i));
 			pda.input(s);
-		
-			System.out.print(pda.currentState + " ");
 			
+			System.out.print(pda.currentState + " ");
 			buffer1.write(pda.currentState + " ");
+			}
 
-		}
+			for (int i = 0; i < pda.states.length; i++) {
+				
+				
+				
+				if(pda.input_e()){
+					System.out.print(pda.currentState + " ");
+					buffer1.write(pda.currentState + " ");
+				}
+				
+				
+			}
+		
+
+
 		buffer1.newLine();
 		System.out.println();
 		if (pda.isAccepted() == true) {
