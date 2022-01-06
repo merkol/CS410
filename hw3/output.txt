@@ -1,0 +1,5 @@
+Route Taken :
+q1 q2 q3 q4 qR Rejected
+Route Taken :
+q1 qR 
+Rejected
